@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RNG Tracker - Color Prediction Analysis</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <h1>🎲 RNG Tracker</h1>
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="#dashboard" onclick="showSection('dashboard')">Dashboard</a></li>
+        <li><a href="#analysis" onclick="showSection('analysis')">Analysis</a></li>
+        <li><a href="#prediction" onclick="showSection('prediction')">Prediction</a></li>
+        <li><button class="btn-logout" onclick="logout()">Logout</button></li>
+      </ul>
+    </nav>
+
+    <!-- Login Section -->
+    <section id="login-section" class="section">
+      <div class="login-container">
+        <h2>Login to Color Prediction Site</h2>
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="username">Username/Email:</label>
+            <input type="text" id="username" name="username" required placeholder="Enter your username">
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+          </div>
+          <div class="form-group">
+            <label for="siteUrl">Site URL:</label>
+            <input type="url" id="siteUrl" name="siteUrl" required placeholder="e.g., https://91club.com">
+          </div>
+          <button type="submit" class="btn-primary">Login & Start Tracking</button>
+        </form>
+        <div id="login-status" class="status-message"></div>
+      </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section hidden">
+      <h2>📊 Dashboard</h2>
+      <div class="dashboard-grid">
+        <div class="card">
+          <h3>Live Game Data</h3>
+          <button class="btn-secondary" onclick="getLiveData()">Refresh Data</button>
+          <div id="live-data" class="data-container">
+            <p>Loading...</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Color Statistics</h3>
+          <canvas id="colorChart"></canvas>
+        </div>
+        <div class="card">
+          <h3>Pattern Frequency</h3>
+          <div id="patterns" class="data-container"></div>
+        </div>
+        <div class="card">
+          <h3>Next Prediction</h3>
+          <div id="prediction-display" class="prediction-box">
+            <p>Analyzing...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Analysis Section -->
+    <section id="analysis" class="section hidden">
+      <h2>🔍 Detailed Analysis</h2>
+      <div class="analysis-container">
+        <button class="btn-primary" onclick="analyzeData()">Run Full Analysis</button>
+        
+        <div class="analysis-grid">
+          <div class="card">
+            <h3>Probability Distribution</h3>
+            <div id="probabilities" class="data-container"></div>
+          </div>
+          <div class="card">
+            <h3>Anomalies Detected</h3>
+            <div id="anomalies" class="data-container"></div>
+          </div>
+          <div class="card">
+            <h3>RNG Bias Check</h3>
+            <div id="bias-check" class="data-container"></div>
+          </div>
+          <div class="card">
+            <h3>Historical Analysis</h3>
+            <div id="history" class="data-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prediction Section -->
+    <section id="prediction" class="section hidden">
+      <h2>🎯 Predictions</h2>
+      <div class="prediction-container">
+        <button class="btn-primary" onclick="getPredictions()">Get Next Predictions</button>
+        <div class="cards-grid">
+          <div class="card">
+            <h3>Single Prediction</h3>
+            <div id="single-prediction" class="data-container"></div>
+          </div>
+          <div class="card">
+            <h3>Next 5 Results</h3>
+            <div id="batch-predictions" class="data-container"></div>
+          </div>
+          <div class="card">
+            <h3>Trend Analysis</h3>
+            <canvas id="trendChart"></canvas>
+          </div>
+          <div class="card">
+            <h3>Confidence Score</h3>
+            <div id="confidence" class="data-container"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status Footer -->
+    <footer class="footer">
+      <p id="status-text">Ready to connect...</p>
+      <p id="timestamp"></p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
